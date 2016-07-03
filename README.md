@@ -1,4 +1,4 @@
-#MixLI_Lib
+#MixLI_Lib - Mix Line Interface Library
 #Free, open-source, lightweight and highly configurable C++ TUI library for POSIX systems.
 
 #Description
