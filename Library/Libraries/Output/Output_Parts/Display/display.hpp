@@ -49,7 +49,7 @@ private:
     int DisplayHandler(void*);      //Handles display buffer
     void Output();                  //Low-level buffer displayment
 
-    int refresh;                    //Refresh rate in Hz and flag handling whether auto refreshing of display is ON or OFF CANNOT BE 1
+    int refresh;                    //Refresh rate in Hz and flag handling whether auto refreshing of display is ON or OFF
     int display_request;            //Buffer display request flag and handling
 
     pthread_t handler;              //Thread running DisplayHandler

@@ -44,7 +44,7 @@ Display::Display(int _width, int _height, bool memory_optimized = false, int _re
     }
     else
     {
-        refresh = 1;
+        refresh = 0;
         //Setting sleep time calculated by refresh rate
     }
 
@@ -78,24 +78,48 @@ Display::~Display()
 }
 //Destructor
 
+void Refresh()
+{
+    Output();
+}
+//Refreshes display
+
 int DisplayHandler(void*)
 {
     int retval = 0;
     //Return value of this thread - will handle errors and signals
 
+    if(refresh >0)
+    {
+        int sleepperiod = (1/refresh)*1000000;
+        //Calculating period of sleep
+    }
+    else
+    {
+        int sleepperiod = (1/refresh+1)*1000000;
+        //Calculating period of sleep
+    }
+    //Calculating refresh rate based on mode
+
+    Output();
+    //Output handling
+    
     while(true)
     {
         try
         {
-            int sleepperiod = (1/refresh)*1000000;
-            //Calculating period of sleep
-
-            if(refresh > 1)
+            if(refresh > 0)
             {
                 Refresh();
                 usleep(sleepperiod-(sleepperiod/10000);
                 //Right amount of sleep for refresh
             }
+
+            if(display_request > 0) //Checking if refresh demanded
+            {
+                Refresh();
+            }
+            //Refreshing on demand
 
             usleep(sleepperiod/10000);
             //Static sleep even if not refreshing to not push CPU too much
@@ -119,6 +143,24 @@ int DisplayHandler(void*)
     pthread_exit(retval);
 }
 //Handles display buffer
+
+void Output()
+{
+    for(int y = 0; y < height; y++)
+    {
+        for(int x = 0; x < height; x++)
+        {
+            cout << buffer[x][y];
+            //Output single char
+        }
+        //Output single line of image
+
+        cout << '\n';
+        //Start new line
+    }
+    //Buffer outputting loops
+}
+//Low-level buffer displayment
 
 int* DisplayHandler_Wrapper(*Display handler)
 {
