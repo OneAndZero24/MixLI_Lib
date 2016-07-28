@@ -28,6 +28,11 @@
 //POSIX Multithreading
 
 #include <unistd.h>
+//Unix standard library
+
+#include <stdio.h>
+#include <iostream>
+//I/O handling libraries
 
 //}
 //Libraries
